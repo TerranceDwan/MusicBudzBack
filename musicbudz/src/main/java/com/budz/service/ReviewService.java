@@ -6,6 +6,8 @@ import com.budz.models.Review;
 import com.budz.models.User;
 
 public class ReviewService {
+	//ReviewRepoImpl rimpl = new ReviewRepoImpl()
+	
 	public void postReview(Review review) {
 		
 	}
