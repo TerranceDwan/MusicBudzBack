@@ -55,6 +55,9 @@ public class User {
 		this.lastName = lastName;
 	}
 	
+	public User() {
+		super();
+	}
 	
 	public User(int userId, String email, String password, String userName, String firstName, String lastName) {
 		super();

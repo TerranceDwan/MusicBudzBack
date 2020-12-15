@@ -6,11 +6,12 @@ import com.budz.models.User;
 
 public interface UserRepo {
 
-	void createUser(String email, String password, String userName, String firstName, String lastName);
+	void createUser(User user);
 	ArrayList<User> getAllUsers();
+	ArrayList<User> getUsersByUsername(String query);
 	User loginWithEmail(String email, String password);
 	User loginWithUsername(String username, String password);
-	User getUserData(int userId);
+	User getUserDataById(int userId);
 	ArrayList<User> getFriends(int userId);
 	void updateUserData(User user);
 	void deleteAccount(int userId);
