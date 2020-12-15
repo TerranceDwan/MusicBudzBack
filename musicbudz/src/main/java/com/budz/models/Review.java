@@ -1,33 +1,15 @@
 package com.budz.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 import com.budz.exceptions.InvalidRatingException;
 
-@Entity
 public abstract class Review {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int reviewId;
 	private int userId;
 	private String artistName;
 	private float rating;
 	private String title;
 	private String review;
 	
-	public Review(int reviewId, int userId, String artistName, float rating, String title, String review) {
-		super();
-		this.reviewId = reviewId;
-		this.userId = userId;
-		this.artistName = artistName;
-		this.rating = rating;
-		this.title = title;
-		this.review = review;
-	}
 	
 	public Review(int userId, String artistName, float rating, String title, String review) {
 		super();
@@ -36,14 +18,6 @@ public abstract class Review {
 		this.rating = rating;
 		this.title = title;
 		this.review = review;
-	}
-
-	public int getReviewId() {
-		return reviewId;
-	}
-	
-	public void setReviewId(int reviewId) {
-		this.reviewId = reviewId;
 	}
 	
 	public int getUserId() {
