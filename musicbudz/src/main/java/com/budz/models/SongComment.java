@@ -2,26 +2,34 @@ package com.budz.models;
 
 import java.util.Date;
 
-public class CommentsAlbum {
-	private int id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class SongComment {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int commentId;
 	private int userId;
 	private int reviewId;
 	private Date timestamp;
 	private String comment;
 	
-	public CommentsAlbum(int id, int userId, int reviewId, Date timestamp, String comment) {
-		setId(id);
+	public SongComment(int commentId, int userId, int reviewId, Date timestamp, String comment) {
+		setCommentId(commentId);
 		setUserId(userId);
 		setReviewId(reviewId);
 		setTimestamp(timestamp);
 		setComment(comment);
 	}
 	
-	public int getId() {
-		return id;
+	public int getCommentId() {
+		return commentId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setCommentId(int commentId) {
+		this.commentId = commentId;
 	}
 	public int getUserId() {
 		return userId;
