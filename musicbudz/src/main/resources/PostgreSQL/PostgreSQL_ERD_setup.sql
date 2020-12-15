@@ -8,32 +8,32 @@ drop table if exists "user" cascade;
 
 create table "user" (
 	user_id serial primary key,
-	email varchar,
-	"password" varchar,
-	user_name varchar,
-	first_name varchar,
-	last_name varchar
+	email varchar not null,
+	"password" varchar not null,
+	user_name varchar unique not null,
+	first_name varchar not null,
+	last_name varchar not null
 );
 
 create table album_review (
 	review_id serial primary key,
 	user_id int references "user"(user_id),
-	album_name varchar,
-	artist_name varchar,
-	rating float, 
+	album_name varchar not null,
+	artist_name varchar not null,
+	rating float not null, 
 	check (rating >= 0 and rating <= 5),
-	title varchar,
+	title varchar not null,
 	review varchar
 );
 
 create table song_review (
 	review_id serial primary key,
 	user_id int references "user"(user_id),
-	song_name varchar,
-	artist_name varchar,
-	rating float, 
+	song_name varchar not null,
+	artist_name varchar not null,
+	rating float not null, 
 	check (rating >= 0 and rating <= 5),
-	title varchar,
+	title varchar not null,
 	review varchar
 );
 
@@ -42,7 +42,7 @@ create table album_comment (
 	user_id int references "user"(user_id),
 	review_id int references album_review(review_id),
 	"time" timestamp,
-	"comment" varchar
+	"comment" varchar not null
 );
 
 create table song_comment (
@@ -50,7 +50,7 @@ create table song_comment (
 	user_id int references "user"(user_id),
 	review_id int references song_review(review_id),
 	"time" timestamp,
-	"comment" varchar
+	"comment" varchar not null
 );
 
 create table relationship_statuses (
@@ -67,7 +67,7 @@ create table relationship (
 	user_two_id int references "user"(user_id),
 	status int references relationship_statuses(status_code), 
 	check (status >= 0 and status <= 2),
-	action_user_id int,
+	action_user_id int not null,
 	PRIMARY KEY(user_one_id, user_two_id)
 );
 
