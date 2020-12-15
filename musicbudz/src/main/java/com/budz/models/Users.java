@@ -2,7 +2,7 @@ package com.budz.models;
 
 public class Users {
 
-	private int id;
+	private int userId;
 	private String email;
 	private String password;
 	private String userName;
@@ -10,11 +10,11 @@ public class Users {
 	private String lastName;
 	
 	
-	public int getId() {
-		return id;
+	public int getUserId() {
+		return userId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int userId) {
+		this.userId = userId;
 	}
 	public String getEmail() {
 		return email;
@@ -48,9 +48,9 @@ public class Users {
 	}
 	
 	
-	public Users(int id, String email, String password, String userName, String firstName, String lastName) {
+	public Users(int userId, String email, String password, String userName, String firstName, String lastName) {
 		super();
-		this.id = id;
+		this.userId = userId;
 		this.email = email;
 		this.password = password;
 		this.userName = userName;
