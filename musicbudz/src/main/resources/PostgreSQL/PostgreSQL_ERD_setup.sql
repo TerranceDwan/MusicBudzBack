@@ -40,7 +40,7 @@ create table song_review (
 create table album_comment (
 	comment_id serial primary key,
 	user_id int references "user"(user_id),
-	review_id int references album_review),
+	review_id int references album_review(review_id),
 	"time" timestamp,
 	"comment" varchar
 );
@@ -48,7 +48,7 @@ create table album_comment (
 create table song_comment (
 	comment_id serial primary key,
 	user_id int references "user"(user_id),
-	review_id int references "song_review"(user_id),
+	review_id int references song_review(review_id),
 	"time" timestamp,
 	"comment" varchar
 );
