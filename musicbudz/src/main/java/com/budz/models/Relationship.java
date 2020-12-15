@@ -36,6 +36,9 @@ public class Relationship {
 		this.actionUserId = actionUserId;
 	}
 	
+	public Relationship() {
+		super();
+	}
 	
 	public Relationship(int userOneId, int userTwoId, int status, int actionUserId) {
 		super();
