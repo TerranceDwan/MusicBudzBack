@@ -1,6 +1,9 @@
 package com.budz.models;
 
-public class Relationships {
+import javax.persistence.Entity;
+
+@Entity
+public class Relationship {
 	
 	private int userOneId;
 	private int userTwoId;
@@ -34,7 +37,7 @@ public class Relationships {
 	}
 	
 	
-	public Relationships(int userOneId, int userTwoId, int status, int actionUserId) {
+	public Relationship(int userOneId, int userTwoId, int status, int actionUserId) {
 		super();
 		this.userOneId = userOneId;
 		this.userTwoId = userTwoId;

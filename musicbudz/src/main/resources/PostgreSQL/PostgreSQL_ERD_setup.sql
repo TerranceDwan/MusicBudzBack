@@ -1,13 +1,13 @@
-drop table if exists review_album cascade;
-drop table if exists review_song cascade;
-drop table if exists comments_album cascade;
-drop table if exists comments_song cascade;
-drop table if exists relationships cascade;
+drop table if exists album_review cascade;
+drop table if exists song_review cascade;
+drop table if exists album_comment cascade;
+drop table if exists song_comment cascade;
+drop table if exists relationship cascade;
 drop table if exists relationship_statuses cascade;
-drop table if exists users cascade;
+drop table if exists "user" cascade;
 
-create table users (
-	id serial primary key,
+create table "user" (
+	user_id serial primary key,
 	email varchar,
 	"password" varchar,
 	user_name varchar,
@@ -15,9 +15,9 @@ create table users (
 	last_name varchar
 );
 
-create table review_album (
-	id serial primary key,
-	user_id int references users(id),
+create table album_review (
+	review_id serial primary key,
+	user_id int references "user"(user_id),
 	album_name varchar,
 	artist_name varchar,
 	rating float, 
@@ -26,9 +26,9 @@ create table review_album (
 	review varchar
 );
 
-create table review_song (
-	id serial primary key,
-	user_id int references users(id),
+create table song_review (
+	review_id serial primary key,
+	user_id int references "user"(user_id),
 	song_name varchar,
 	artist_name varchar,
 	rating float, 
@@ -37,18 +37,18 @@ create table review_song (
 	review varchar
 );
 
-create table comments_album (
-	id serial primary key,
-	user_id int references users(id),
-	review_id int references review_album(id),
+create table album_comment (
+	comment_id serial primary key,
+	user_id int references "user"(user_id),
+	review_id int references album_review),
 	"time" timestamp,
 	"comment" varchar
 );
 
-create table comments_song (
-	id serial primary key,
-	user_id int references users(id),
-	review_id int references review_song(id),
+create table song_comment (
+	comment_id serial primary key,
+	user_id int references "user"(user_id),
+	review_id int references "song_review"(user_id),
 	"time" timestamp,
 	"comment" varchar
 );
@@ -58,9 +58,9 @@ create table relationship_statuses (
 	status varchar
 );
 
-create table relationships (
-	user_one_id int references users(id),
-	user_two_id int references users(id),
+create table relationship (
+	user_one_id int references "user"(user_id),
+	user_two_id int references "user"(user_id),
 	status int references relationship_statuses(status_code), 
 	check (status >= 0 and status <= 2),
 	action_user_id int,

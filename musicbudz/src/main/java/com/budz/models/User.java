@@ -1,7 +1,15 @@
 package com.budz.models;
 
-public class Users {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
+public class User {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int userId;
 	private String email;
 	private String password;
@@ -48,7 +56,7 @@ public class Users {
 	}
 	
 	
-	public Users(int userId, String email, String password, String userName, String firstName, String lastName) {
+	public User(int userId, String email, String password, String userName, String firstName, String lastName) {
 		super();
 		this.userId = userId;
 		this.email = email;
@@ -58,7 +66,7 @@ public class Users {
 		this.lastName = lastName;
 	}
 	
-	public Users(String email, String password, String userName, String firstName, String lastName) {
+	public User(String email, String password, String userName, String firstName, String lastName) {
 		super();
 		this.email = email;
 		this.password = password;
