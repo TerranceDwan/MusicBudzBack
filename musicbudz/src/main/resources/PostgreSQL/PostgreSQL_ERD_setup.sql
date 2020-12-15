@@ -58,6 +58,10 @@ create table relationship_statuses (
 	status varchar
 );
 
+insert into relationship_statuses values (0, 'Pending');
+insert into relationship_statuses values (1, 'Accepted');
+insert into relationship_statuses  values (2, 'Denied');
+
 create table relationship (
 	user_one_id int references "user"(user_id),
 	user_two_id int references "user"(user_id),
