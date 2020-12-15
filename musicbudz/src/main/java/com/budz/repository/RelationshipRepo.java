@@ -12,4 +12,5 @@ public interface RelationshipRepo {
 	void acceptFriendRequest(int userId, int friendUserId);
 	void denyFriendRequest(int userId, int friendUserId);
 	void deleteFriend(int userId, int friendUserId);
+	void deleteAllFriends(int userId);
 }
