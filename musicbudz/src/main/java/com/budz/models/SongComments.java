@@ -2,14 +2,14 @@ package com.budz.models;
 
 import java.util.Date;
 
-public class CommentsSong {
+public class SongComments {
 	private int id;
 	private int userId;
 	private int reviewId;
 	private Date timestamp;
 	private String comment;
 	
-	public CommentsSong(int id, int userId, int reviewId, Date timestamp, String comment) {
+	public SongComments(int id, int userId, int reviewId, Date timestamp, String comment) {
 		setId(id);
 		setUserId(userId);
 		setReviewId(reviewId);
