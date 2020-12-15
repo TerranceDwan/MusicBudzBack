@@ -1,11 +1,16 @@
 package com.budz.models;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 
 @Entity
+@IdClass(RelationshipId.class)
 public class Relationship {
 	
+	@Id
 	private int userOneId;
+	@Id
 	private int userTwoId;
 	private int status;
 	private int actionUserId;
