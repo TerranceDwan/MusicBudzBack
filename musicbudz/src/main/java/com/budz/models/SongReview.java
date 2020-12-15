@@ -1,8 +1,17 @@
 package com.budz.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import com.budz.exceptions.InvalidRatingException;
 
+@Entity
 public class SongReview {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int reviewId;
 	private int userId;
 	private String songName;
