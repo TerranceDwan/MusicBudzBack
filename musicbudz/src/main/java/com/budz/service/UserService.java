@@ -1,5 +1,5 @@
 package com.budz.service;
 
-public class dummies {
+public class UserService {
 
 }
