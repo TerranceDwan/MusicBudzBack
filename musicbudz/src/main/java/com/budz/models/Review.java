@@ -11,13 +11,13 @@ public abstract class Review {
 	private String review;
 	
 	
-	public Review(int userId, String artistName, float rating, String title, String review) {
+	public Review(int userId, String artistName, float rating, String title, String review) throws InvalidRatingException {
 		super();
-		this.userId = userId;
-		this.artistName = artistName;
-		this.rating = rating;
-		this.title = title;
-		this.review = review;
+		this.setUserId(userId);
+		this.setArtistName(artistName);
+		this.setRating(rating);
+		this.setTitle(title);
+		this.setReview(review);
 	}
 	
 	public int getUserId() {
