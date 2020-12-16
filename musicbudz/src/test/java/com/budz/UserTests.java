@@ -49,7 +49,6 @@ public class UserTests {
 	
 	@Test
 	public void createUser(){
-		System.out.println(userRepo);
 		Mockito.doNothing().when(userRepo).createUser(Mockito.any());
 		
 		userService.createUser(users.get(0));
@@ -59,8 +58,6 @@ public class UserTests {
 	
 	@Test
 	public void createUserBadEmail() {
-		Mockito.doNothing().when(userRepo).createUser(Mockito.any());
-		
 		userService.createUser(users.get(1));
 		
 		Mockito.verifyNoInteractions(userRepo);
@@ -68,8 +65,6 @@ public class UserTests {
 	
 	@Test
 	public void createUserShortPassword() {
-		Mockito.doNothing().when(userRepo).createUser(Mockito.any());
-		
 		userService.createUser(users.get(2));
 		
 		Mockito.verifyNoInteractions(userRepo);
@@ -77,8 +72,6 @@ public class UserTests {
 	
 	@Test
 	public void createUserNoUsername() {
-		Mockito.doNothing().when(userRepo).createUser(Mockito.any());
-		
 		userService.createUser(users.get(3));
 		
 		Mockito.verifyNoInteractions(userRepo);
@@ -86,8 +79,6 @@ public class UserTests {
 	
 	@Test
 	public void createUserNoFirstName() {
-		Mockito.doNothing().when(userRepo).createUser(Mockito.any());
-		
 		userService.createUser(users.get(4));
 		
 		Mockito.verifyNoInteractions(userRepo);
@@ -95,9 +86,33 @@ public class UserTests {
 	
 	@Test
 	public void createUserNoLastName() {
-		Mockito.doNothing().when(userRepo).createUser(Mockito.any());
-		
 		userService.createUser(users.get(5));
+		
+		Mockito.verifyNoInteractions(userRepo);
+	}
+	
+	@Test
+	public void loginWithEmail() {
+		Mockito.doReturn(users.get(0)).when(userRepo).loginWithEmail(Mockito.any(), Mockito.any());
+		
+		userService.login(users.get(0).getEmail(), users.get(0).getPassword());
+		
+		Mockito.verify(userRepo).loginWithEmail(Mockito.any(), Mockito.any());
+	}
+	
+	@Test
+	public void loginWithUsername() {
+		Mockito.doReturn(users.get(0)).when(userRepo).loginWithUsername(Mockito.any(), Mockito.any());
+		
+		userService.login(users.get(0).getUserName(), users.get(0).getPassword());
+		
+		Mockito.verify(userRepo).loginWithUsername(Mockito.any(), Mockito.any());
+	}
+	
+	@Test
+	public void loginWithEmptyField() {
+		userService.login(users.get(0).getUserName(), "");
+		userService.login("", users.get(0).getPassword());
 		
 		Mockito.verifyNoInteractions(userRepo);
 	}
