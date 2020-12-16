@@ -1,7 +1,5 @@
-drop table if exists album_review cascade;
-drop table if exists song_review cascade;
-drop table if exists album_comment cascade;
-drop table if exists song_comment cascade;
+drop table if exists reviews cascade;
+drop table if exists comments cascade;
 drop table if exists relationship cascade;
 drop table if exists relationship_statuses cascade;
 drop table if exists "user" cascade;
@@ -15,40 +13,23 @@ create table "user" (
 	last_name varchar not null
 );
 
-create table album_review (
+create table reviews (
 	review_id serial primary key,
 	user_id int references "user"(user_id),
-	album_name varchar not null,
-	artist_name varchar not null,
+	spotify_id varchar NOT NULL,
+	"name" varchar not null,
+	artist varchar not null,
+	"type" varchar NOT NULL,
 	rating float not null, 
 	check (rating >= 0 and rating <= 5),
 	title varchar not null,
 	review varchar
 );
 
-create table song_review (
-	review_id serial primary key,
-	user_id int references "user"(user_id),
-	song_name varchar not null,
-	artist_name varchar not null,
-	rating float not null, 
-	check (rating >= 0 and rating <= 5),
-	title varchar not null,
-	review varchar
-);
-
-create table album_comment (
+create table comments (
 	comment_id serial primary key,
 	user_id int references "user"(user_id),
-	review_id int references album_review(review_id),
-	"time" timestamp,
-	"comment" varchar not null
-);
-
-create table song_comment (
-	comment_id serial primary key,
-	user_id int references "user"(user_id),
-	review_id int references song_review(review_id),
+	review_id int references reviews(review_id),
 	"time" timestamp,
 	"comment" varchar not null
 );
@@ -60,7 +41,8 @@ create table relationship_statuses (
 
 insert into relationship_statuses values (0, 'Pending');
 insert into relationship_statuses values (1, 'Accepted');
-insert into relationship_statuses  values (2, 'Denied');
+insert into relationship_statuses values (2, 'Denied');
+insert into relationship_statuses values (3, 'Deleted');
 
 create table relationship (
 	user_one_id int references "user"(user_id),

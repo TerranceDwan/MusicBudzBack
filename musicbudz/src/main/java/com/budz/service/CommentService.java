@@ -9,6 +9,9 @@ public class CommentService {
 	public void addComment(Comment comment) {
 		
 	}
+	public void updateComment(Comment comment) {
+		
+	}
 	public void deleteComment(Comment comment) {
 		
 	}
