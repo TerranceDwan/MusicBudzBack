@@ -10,10 +10,6 @@ public class RelationshipService {
 		
 	}
 	
-	public ArrayList<User> getFriends(User user){
-		return new ArrayList<User>();
-	}
-	
 	public ArrayList<User> getFriendRequests(User user){
 		return new ArrayList<User>();
 	}
