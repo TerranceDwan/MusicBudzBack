@@ -6,22 +6,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "comments")
 public abstract class Comment {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int commentId;
 	private int userId;
 	private int reviewId;
-	private Date timestamp;
+	private Date time;
 	private String comment;
 	
-	public Comment(int commentId, int userId, int reviewId, Date timestamp, String comment) {
+	public Comment(int commentId, int userId, int reviewId, Date time, String comment) {
 		setCommentId(commentId);
 		setUserId(userId);
 		setReviewId(reviewId);
-		setTimestamp(timestamp);
+		setTime(time);
 		setComment(comment);
 	}
 	
@@ -43,11 +45,11 @@ public abstract class Comment {
 	public void setReviewId(int reviewId) {
 		this.reviewId = reviewId;
 	}
-	public Date getTimestamp() {
-		return timestamp;
+	public Date getTime() {
+		return time;
 	}
-	public void setTimestamp(Date timestamp) {
-		this.timestamp = timestamp;
+	public void setTime(Date time) {
+		this.time = time;
 	}
 	public String getComment() {
 		return comment;
