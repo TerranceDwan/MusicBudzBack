@@ -1,9 +1,22 @@
 package com.budz.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.budz.exceptions.InvalidRatingException;
 
-public abstract class Review {
+@Entity
+@Table(name = "reviews")
+public class Review {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int reviewId;
+	private String name;
+	private String type;
 	private int userId;
 	private String artistName;
 	private float rating;
@@ -11,13 +24,23 @@ public abstract class Review {
 	private String review;
 	
 	
-	public Review(int userId, String artistName, float rating, String title, String review) throws InvalidRatingException {
+	public Review(String name, String type, int userId, String artistName, float rating, String title, String review) throws InvalidRatingException {
 		super();
+		this.setName(name);
+		this.setType(type);
 		this.setUserId(userId);
 		this.setArtistName(artistName);
 		this.setRating(rating);
 		this.setTitle(title);
 		this.setReview(review);
+	}
+	
+	public int getReviewId() {
+		return reviewId;
+	}
+	
+	public void setReviewId(int reviewId) {
+		this.reviewId = reviewId;
 	}
 	
 	public int getUserId() {
@@ -61,5 +84,21 @@ public abstract class Review {
 
 	public void setReview(String review) {
 		this.review = review;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 }
