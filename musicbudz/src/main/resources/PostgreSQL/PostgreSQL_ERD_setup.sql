@@ -8,7 +8,7 @@ drop table if exists "user" cascade;
 
 create table "user" (
 	user_id serial primary key,
-	email varchar not null,
+	email varchar unique not null,
 	"password" varchar not null,
 	user_name varchar unique not null,
 	first_name varchar not null,

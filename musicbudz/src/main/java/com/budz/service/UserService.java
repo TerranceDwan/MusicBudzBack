@@ -3,11 +3,19 @@ package com.budz.service;
 import java.util.ArrayList;
 
 import com.budz.models.User;
+import com.budz.repository.UserRepo;
+import com.budz.repository.UserRepoImpl;
 
 public class UserService {
 	
+	private UserRepo userRepo;
+	
+	public UserService() {
+		this.userRepo = new UserRepoImpl();
+	}
+	
 	public void createUser(User user) {
-		
+		userRepo.createUser(user);;
 	}
 	
 	public User login(String usernameOrEmail, String password) {
