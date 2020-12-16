@@ -5,15 +5,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import com.budz.exceptions.InvalidRatingException;
-import com.budz.models.AlbumReview;
-import com.budz.models.SongReview;
-
+import com.budz.models.Review;
 class ReviewTests {
 
 	@Test
-	void tooHighAlbumReviewThrowsError() {
+	void tooHighReviewThrowsError() {
 		Exception exception = assertThrows(InvalidRatingException.class, () -> {
-	        new AlbumReview(0, 0, "test", "test", 11, "test", "test");
+	        new Review("test", "album", 0, "test", 11, "test", "test");
 	    });
 
 	    String expectedMessage = "InvalidRatingException";
@@ -23,33 +21,9 @@ class ReviewTests {
 	}
 	
 	@Test
-	void tooLowAlbumReviewThrowsError() {
+	void tooLowReviewThrowsError() {
 		Exception exception = assertThrows(InvalidRatingException.class, () -> {
-	        new AlbumReview(0, 0, "test", "test", -1, "test", "test");
-	    });
-
-	    String expectedMessage = "InvalidRatingException";
-	    String actualMessage = exception.getMessage();
-
-	    assertTrue(actualMessage.contains(expectedMessage));
-	}
-
-	@Test
-	void tooHighSongReviewThrowsError() {
-		Exception exception = assertThrows(InvalidRatingException.class, () -> {
-	        new SongReview(0, 0, "test", "test", 11, "test", "test");
-	    });
-
-	    String expectedMessage = "InvalidRatingException";
-	    String actualMessage = exception.getMessage();
-
-	    assertTrue(actualMessage.contains(expectedMessage));
-	}
-	
-	@Test
-	void tooLowSongReviewThrowsError() {
-		Exception exception = assertThrows(InvalidRatingException.class, () -> {
-	        new SongReview(0, 0, "test", "test", -1, "test", "test");
+	        new Review("test", "album", 0, "test", -1, "test", "test");
 	    });
 
 	    String expectedMessage = "InvalidRatingException";
