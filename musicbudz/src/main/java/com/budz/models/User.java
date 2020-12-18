@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int userId;
 	private String email;
 	private String password;
@@ -77,4 +77,11 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", userName=" + userName
+				+ ", firstName=" + firstName + ", lastName=" + lastName + "]";
+	}
+	
+	
 }

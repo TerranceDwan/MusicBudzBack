@@ -143,15 +143,15 @@ public class UserTests {
 		Mockito.verifyNoInteractions(userRepo);
 	}
 	
-//	----------------------  Get User Data By Id -------------------------
+//	----------------------  Get User By Id -------------------------
 	
 	@Test
-	public void getDataByUserId() {
-		Mockito.doReturn(users.get(0)).when(userRepo).getUserDataById(Mockito.anyInt());
+	public void getUserByUserId() {
+		Mockito.doReturn(users.get(0)).when(userRepo).getUserById(Mockito.anyInt());
 		
-		userService.getUserDataById(1);
+		userService.getUserById(1);
 		
-		Mockito.verify(userRepo).getUserDataById(Mockito.anyInt());
+		Mockito.verify(userRepo).getUserById(Mockito.anyInt());
 	}
 
 //	----------------------  Get Friends -------------------------
