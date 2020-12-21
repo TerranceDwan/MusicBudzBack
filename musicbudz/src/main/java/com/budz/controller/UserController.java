@@ -18,7 +18,7 @@ import com.budz.service.UserService;
 public class UserController {
 	
 	@Autowired
-	private UserService userService;
+	private UserService UserService;
 	
 	@PostMapping("/createUser")
 	public void createUser(@RequestParam String email, 
@@ -28,27 +28,27 @@ public class UserController {
 							@RequestParam String lastName) 
 	{
 		User user = new User(email, password, username, firstName, lastName);
-		userService.createUser(user);
+		UserService.createUser(user);
 	}
 	
 	@PostMapping("login")
 	public User login(@RequestParam String usernameOrEmail, @RequestParam String password) {
-		return userService.login(usernameOrEmail, password);
+		return UserService.login(usernameOrEmail, password);
 	}
 	
 	@GetMapping("/usersByUsername")
 	public List<User> userByUsername(@RequestParam String query) {
-		return userService.getUsersByUsername(query);
+		return UserService.getUsersByUsername(query);
 	}
 	
 	@GetMapping("/userById")
 	public User userById(@RequestParam int id) {
-		return userService.getUserById(id);
+		return UserService.getUserById(id);
 	}
 	
 	@GetMapping("/getFriends")
 	public List<User> getFriends(@RequestParam int id) {
-		return userService.getFriends(id);
+		return UserService.getFriends(id);
 	}
 	
 	@PatchMapping("/updateUser")
@@ -60,11 +60,11 @@ public class UserController {
 							@RequestParam String lastName) 
 	{
 		User user = new User(id,email,password,username,firstName,lastName);
-		userService.updateUser(user);
+		UserService.updateUser(user);
 	}
 	
 	@DeleteMapping("/deleteAccount")
 	public void deleteAccount(@RequestParam int id) {
-		userService.deleteAccount(id);
+		UserService.deleteAccount(id);
 	}
 }

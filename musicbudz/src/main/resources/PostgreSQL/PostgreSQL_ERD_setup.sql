@@ -1,10 +1,10 @@
 drop table if exists reviews cascade;
-drop table if exists comments cascade;
+drop table if exists "comments" cascade;
 drop table if exists relationship cascade;
 drop table if exists relationship_statuses cascade;
-drop table if exists "user" cascade;
+drop table if exists users cascade;
 
-create table "user" (
+create table users (
 	user_id serial primary key,
 	email varchar unique not null,
 	"password" varchar not null,
@@ -15,7 +15,7 @@ create table "user" (
 
 create table reviews (
 	review_id serial primary key,
-	user_id int references "user"(user_id),
+	user_id int references users(user_id),
 	spotify_id varchar NOT NULL,
 	"name" varchar not null,
 	artist varchar not null,
@@ -26,9 +26,9 @@ create table reviews (
 	review varchar
 );
 
-create table comments (
+create table "comments" (
 	comment_id serial primary key,
-	user_id int references "user"(user_id),
+	user_id int references users(user_id),
 	review_id int references reviews(review_id),
 	"time" timestamp,
 	"comment" varchar not null
@@ -45,8 +45,8 @@ insert into relationship_statuses values (2, 'Denied');
 insert into relationship_statuses values (3, 'Deleted');
 
 create table relationship (
-	user_one_id int references "user"(user_id),
-	user_two_id int references "user"(user_id),
+	user_one_id int references users(user_id),
+	user_two_id int references users(user_id),
 	status int references relationship_statuses(status_code), 
 	check (status >= 0 and status <= 2),
 	action_user_id int not null,
