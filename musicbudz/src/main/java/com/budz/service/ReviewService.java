@@ -17,8 +17,8 @@ public class ReviewService {
 	}
 	
 	//might need to make multiple of these? cant think of use cases yet 
-	public void getReview() {
-		
+	public Review getReview(int reviewId) {
+		return null;
 	}
 	
 	public void deleteReview(Review review) {
