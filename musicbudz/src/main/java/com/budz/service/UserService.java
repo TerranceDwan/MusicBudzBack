@@ -36,7 +36,7 @@ public class UserService {
 	}
 	
 	public User getUserById(int userId) {
-		return new User(1, "email@email.com", "password", "user1", "John", "Doe");
+		return userRepo.findById(userId).get();
 	}
 	
 	public List<User> getFriends(int userId){
