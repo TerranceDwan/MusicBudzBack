@@ -30,7 +30,7 @@ public class UserService {
 	}
 	
 	public List<User> getUsersByUsername(String query) {
-		return userRepo.getUserByUserName(query);
+		return userRepo.getUsersByUserName(query);
 	}
 	
 	public User getUserById(int userId) {
@@ -52,8 +52,8 @@ public class UserService {
 		userRepo.save(user);
 	}
 	
-	public void deleteAccount(User user) {
-		userRepo.delete(user);;
+	public void deleteAccount(int id) {
+		userRepo.deleteById(id);
 	}
 
 }
