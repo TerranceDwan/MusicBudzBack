@@ -21,18 +21,16 @@ public class UserService {
 	}
 	
 	public User login(String usernameOrEmail, String password) {
-		return new User(1, "email@email.com", "password", "user1", "John", "Doe");
+		if(usernameOrEmail.contains("@")) {
+			return userRepo.loginEmail(usernameOrEmail, password);
+		}else {
+			return userRepo.loginUserName(usernameOrEmail, password);
+		}
+
 	}
 	
 	public List<User> getUsersByUsername(String query) {
-		return Arrays.asList(
-					new User(1, "email@email.com", "password", "user1", "John", "Doe"),
-					new User(2, "email", "password", "user2", "Jeff", "Doe"),
-					new User(3, "email@email.com", "pass", "user3", "Jim", "Doe"),
-					new User(4, "emailemail.com", "password", "us", "Jim", "Doe"),
-					new User(5, "email@email.com", "abc", "user5", "", "Doe"),
-					new User(6, "email@email.com", "pass", "user6", "Jim", "")
-					);
+		return userRepo.getUserByUserName(query);
 	}
 	
 	public User getUserById(int userId) {
@@ -51,11 +49,11 @@ public class UserService {
 	}
 	
 	public void updateUser(User user) {
-		System.out.println("updateUser");
+		userRepo.save(user);
 	}
 	
-	public void deleteAccount(int userId) {
-		System.out.println("deleteUser");
+	public void deleteAccount(User user) {
+		userRepo.delete(user);;
 	}
 
 }
