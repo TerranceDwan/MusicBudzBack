@@ -32,8 +32,9 @@ public class UserService {
 			throw new IllegalArgumentException("Username must contain more than 3 characters");
 		} else if(user.getPassword().trim().length() < 8) {
 			throw new IllegalArgumentException("Passwords must contain more than 8 characters");
+		} else {
+			userRepo.save(user);
 		}
-		userRepo.save(user);
 	}
 	
 	public User login(String usernameOrEmail, String password) {
@@ -48,7 +49,11 @@ public class UserService {
 	}
 	
 	public List<User> getUsersByUsername(String query) {
-		return userRepo.getUsersByUserName(query);
+		if(query.length() < 3) {
+			throw new IllegalArgumentException("No Usernames Exist with less than 3 characters");
+		} else {
+			return userRepo.getUsersByUserName(query);
+		}
 	}
 	
 	public User getUserById(int userId) {
@@ -67,7 +72,24 @@ public class UserService {
 	}
 	
 	public void updateUser(User user) {
-		userRepo.save(user);
+		if(user.getEmail().isBlank() || 
+			user.getFirstName().isBlank() || 
+			user.getLastName().isBlank() || 
+			user.getUserName().isBlank() || 
+			user.getPassword().isBlank()
+		) {
+			throw new IllegalArgumentException("One or More fields were blank");
+		} else if(!User.emailIsValid(user.getEmail())) {
+			throw new IllegalArgumentException("Invalid Email Input");
+		} else if(User.emailIsValid(user.getUserName())) {
+			throw new IllegalArgumentException("Username is too similar to an email address");
+		} else if(user.getUserName().trim().length() < 3) {
+			throw new IllegalArgumentException("Username must contain more than 3 characters");
+		} else if(user.getPassword().trim().length() < 8) {
+			throw new IllegalArgumentException("Passwords must contain more than 8 characters");
+		} else {
+			userRepo.save(user);
+		}
 	}
 	
 	public void deleteAccount(int id) {

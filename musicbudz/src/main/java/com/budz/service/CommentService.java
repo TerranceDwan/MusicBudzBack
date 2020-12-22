@@ -25,7 +25,7 @@ public class CommentService {
 		commentRepository.save(comment);
 	}
 	public void update(Comment comment) {
-		commentRepository.update(comment);
+		commentRepository.save(comment);
 	}
 	public void delete(Comment comment) {
 		commentRepository.delete(comment);
