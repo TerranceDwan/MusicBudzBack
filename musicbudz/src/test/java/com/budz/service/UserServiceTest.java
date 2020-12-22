@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import org.junit.Before;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -36,18 +37,30 @@ public class UserServiceTest {
 	
 	@BeforeEach
 	public void beforeEach() {
-		User user1 = new User(1, "email@email.com", "password", "user1", "John", "Doe");
-		User user2 = new User(2, "email", "password", "user2", "Jeff", "Doe");
+		User user1 = new User(1, "email@email.com", "password", "user1@", "John", "Doe");
+		User user2 = new User(2, "emailemailcom", "password", "user2", "Jeff", "Doe");
 		User user3 = new User(3, "email@email.com", "pass", "user3", "Jim", "Doe");
-		User user4 = new User(4, "emailemail.com", "password", "us", "Jim", "Doe");
-		User user5 = new User(5, "email@email.com", "abc", "user5", "", "Doe");
-		User user6 = new User(6, "email@email.com", "pass", "user6", "Jim", "");
+		User user4 = new User(4, "email@email.com", "password", "us", "Jim", "Doe");
+		User user5 = new User(5, "email@email.com", "password", "user5", "", "Doe");
+		User user6 = new User(6, "email@email.com", "password", "user6", "Jim", "");
+		User user7 = new User(7, "email@emailcom", "password", "user2", "Jeff", "Doe");
+		User user8 = new User(8, "emailemail.com", "password", "user3", "Jim", "Doe");
+		User user9 = new User(9, "email@email.com", "password", "user@email.com", "Jim", "Doe");
+		User user10 = new User(10, "email@email.com", "password", "2a", "Jim", "Doe");
+		User user11 = new User(3, "email@email.com", "trying", "user3", "Jim", "Doe");
+		User user12 = new User(3, "email@email.com", "onemore", "user3", "Jim", "Doe");
 		users.add(user1);
 		users.add(user2);
 		users.add(user3);
 		users.add(user4);
 		users.add(user5);
 		users.add(user6);
+		users.add(user7);
+		users.add(user8);
+		users.add(user9);
+		users.add(user10);
+		users.add(user11);
+		users.add(user12);
 	}
 	
 //	------------------------ Create User Method --------------------------
@@ -64,37 +77,47 @@ public class UserServiceTest {
 	
 	@Test
 	public void createUserBadEmail() {
-		userService.createUser(users.get(1));
-		userService.createUser(users.get(3));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.createUser(users.get(1)));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.createUser(users.get(6)));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.createUser(users.get(7)));
 		
 		Mockito.verifyNoInteractions(userRepo);
 	}
 	
 	@Test
 	public void createUserShortPassword() {
-		userService.createUser(users.get(2));
-		userService.createUser(users.get(4));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.createUser(users.get(2)));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.createUser(users.get(10)));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.createUser(users.get(11)));
 		
 		Mockito.verifyNoInteractions(userRepo);
 	}
 	
 	@Test
-	public void createUserNoUsername() {
-		userService.createUser(users.get(3));
+	public void createUserShortUsername() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.createUser(users.get(3)));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.createUser(users.get(9)));
 		
+		Mockito.verifyNoInteractions(userRepo);
+	}
+	
+	@Test
+	public void createUserUserNameSimilarToEmail() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.createUser(users.get(8)));
+
 		Mockito.verifyNoInteractions(userRepo);
 	}
 	
 	@Test
 	public void createUserNoFirstName() {
-		userService.createUser(users.get(4));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.createUser(users.get(4)));
 		
 		Mockito.verifyNoInteractions(userRepo);
 	}
 	
 	@Test
 	public void createUserNoLastName() {
-		userService.createUser(users.get(5));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.createUser(users.get(5)));
 		
 		Mockito.verifyNoInteractions(userRepo);
 	}
@@ -121,9 +144,9 @@ public class UserServiceTest {
 	
 	@Test
 	public void loginWithEmptyField() {
-		userService.login(users.get(0).getUserName(), "");
-		userService.login("", users.get(0).getPassword());
-		userService.login("", "");
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.login(users.get(0).getUserName(), ""));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.login("", users.get(0).getPassword()));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.login("",""));
 		
 		Mockito.verifyNoInteractions(userRepo);
 	}
@@ -142,7 +165,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void searchUsersByUsernameLessThan3Characters(){
-		userService.getUsersByUsername("us");
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.getUsersByUsername("us"));
 		
 		Mockito.verifyNoInteractions(userRepo);
 	}
@@ -182,20 +205,51 @@ public class UserServiceTest {
 	
 	@Test
 	public void updateUserBadEmail() {
-		userService.updateUser(users.get(1));
-		userService.updateUser(users.get(1));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.updateUser(users.get(1)));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.updateUser(users.get(6)));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.updateUser(users.get(7)));
+
 		
 		Mockito.verifyNoInteractions(userRepo);
 	}
 	
 	@Test
 	public void updateUserShortPassword() {
-		userService.updateUser(users.get(2));
-		userService.updateUser(users.get(4));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.updateUser(users.get(2)));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.updateUser(users.get(10)));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.updateUser(users.get(11)));
 		
 		Mockito.verifyNoInteractions(userRepo);
 	}
 	
+	@Test
+	public void updateUserShortUsername() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.updateUser(users.get(3)));
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.updateUser(users.get(9)));
+		
+		Mockito.verifyNoInteractions(userRepo);
+	}
+	
+	@Test
+	public void updateUserUserNameSimilarToEmail() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.updateUser(users.get(8)));
+
+		Mockito.verifyNoInteractions(userRepo);
+	}
+	
+	@Test
+	public void updateUserNoFirstName() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.updateUser(users.get(4)));
+		
+		Mockito.verifyNoInteractions(userRepo);
+	}
+	
+	@Test
+	public void updateUserNoLastName() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> userService.updateUser(users.get(5)));
+		
+		Mockito.verifyNoInteractions(userRepo);
+	}
 //	----------------------  Delete User -------------------------
 	@Test
 	public void deleteUser() {

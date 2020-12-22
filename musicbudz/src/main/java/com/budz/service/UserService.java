@@ -17,14 +17,32 @@ public class UserService {
 	private UserRepo userRepo;
 	
 	public void createUser(User user) {
+		if(user.getEmail().isBlank() || 
+			user.getFirstName().isBlank() || 
+			user.getLastName().isBlank() || 
+			user.getUserName().isBlank() || 
+			user.getPassword().isBlank()
+		) {
+			throw new IllegalArgumentException("One or More fields were blank");
+		} else if(!User.emailIsValid(user.getEmail())) {
+			throw new IllegalArgumentException("Invalid Email Input");
+		} else if(User.emailIsValid(user.getUserName())) {
+			throw new IllegalArgumentException("Username is too similar to an email address");
+		} else if(user.getUserName().trim().length() < 3) {
+			throw new IllegalArgumentException("Username must contain more than 3 characters");
+		} else if(user.getPassword().trim().length() < 8) {
+			throw new IllegalArgumentException("Passwords must contain more than 8 characters");
+		}
 		userRepo.save(user);
 	}
 	
 	public User login(String usernameOrEmail, String password) {
-		if(usernameOrEmail.contains("@")) {
+		if(User.emailIsValid(usernameOrEmail)) {
 			return userRepo.loginEmail(usernameOrEmail, password);
-		}else {
+		}else if (!usernameOrEmail.isBlank() && !password.isBlank()){
 			return userRepo.loginUserName(usernameOrEmail, password);
+		}else {
+			throw new IllegalArgumentException("Both fields require input");
 		}
 
 	}

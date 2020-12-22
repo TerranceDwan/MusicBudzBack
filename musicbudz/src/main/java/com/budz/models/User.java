@@ -85,5 +85,10 @@ public class User {
 				+ ", firstName=" + firstName + ", lastName=" + lastName + "]";
 	}
 	
+	public static boolean emailIsValid(String email) {
+      String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+      return email.matches(regex);
+   }
+	
 	
 }
