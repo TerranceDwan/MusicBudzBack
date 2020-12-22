@@ -6,8 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import org.springframework.stereotype.Service;
-
 import com.budz.models.Review;
 import com.budz.models.User;
 import com.budz.repository.RelationshipRepo;
