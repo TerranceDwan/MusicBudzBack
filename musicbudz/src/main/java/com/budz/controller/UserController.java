@@ -3,11 +3,12 @@ package com.budz.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +16,8 @@ import com.budz.models.User;
 import com.budz.service.UserService;
 
 @RestController
+@RequestMapping(path = "/user")
+@CrossOrigin
 public class UserController {
 	
 	@Autowired
@@ -31,7 +34,7 @@ public class UserController {
 		UserService.createUser(user);
 	}
 	
-	@PostMapping("login")
+	@PostMapping("/login")
 	public User login(@RequestParam String usernameOrEmail, @RequestParam String password) {
 		return UserService.login(usernameOrEmail, password);
 	}
