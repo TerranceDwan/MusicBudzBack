@@ -1,33 +1,35 @@
 package com.budz;
 
-import static org.mockito.Mockito.mock;
-
 import java.util.ArrayList;
 
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.budz.models.User;
-import com.budz.repository.UserRepoImpl;
-import com.budz.service.UserService;
+import com.budz.repository.UserRepo;
+import com.budz.service.UserServiceTest;
 
-
+@WebMvcTest
 public class UserTests {
 	@InjectMocks
-	private static UserService userService;
+	private static UserServiceTest userServiceTest;
 	
-	@Mock private UserRepoImpl userRepo = mock(UserRepoImpl.class);
+//	@Mock private UserRepoImpl userRepo = mock(UserRepoImpl.class);
+	
+	@MockBean
+	UserRepo userRepo;
 	
 	ArrayList<User> users = new ArrayList<User>();
 	
 	@BeforeClass
 	public void setUp() {
-		userService = new UserService();
+		userServiceTest = new UserServiceTest();
 	}
 	
 	@BeforeEach
@@ -51,46 +53,47 @@ public class UserTests {
 	
 	@Test
 	public void createUser(){
-		Mockito.doNothing().when(userRepo).createUser(Mockito.any());
+		System.out.println("Test");
+		Mockito.doNothing().when(userRepo.save(Mockito.any()));
 		
-		userService.createUser(users.get(0));
+		userServiceTest.createUser(users.get(0));
 		
-		Mockito.verify(userRepo).createUser(Mockito.any());
+		Mockito.verify(userRepo.save(Mockito.any()));
 	}
 	
 	@Test
 	public void createUserBadEmail() {
-		userService.createUser(users.get(1));
-		userService.createUser(users.get(3));
+		userServiceTest.createUser(users.get(1));
+		userServiceTest.createUser(users.get(3));
 		
 		Mockito.verifyNoInteractions(userRepo);
 	}
 	
 	@Test
 	public void createUserShortPassword() {
-		userService.createUser(users.get(2));
-		userService.createUser(users.get(4));
+		userServiceTest.createUser(users.get(2));
+		userServiceTest.createUser(users.get(4));
 		
 		Mockito.verifyNoInteractions(userRepo);
 	}
 	
 	@Test
 	public void createUserNoUsername() {
-		userService.createUser(users.get(3));
+		userServiceTest.createUser(users.get(3));
 		
 		Mockito.verifyNoInteractions(userRepo);
 	}
 	
 	@Test
 	public void createUserNoFirstName() {
-		userService.createUser(users.get(4));
+		userServiceTest.createUser(users.get(4));
 		
 		Mockito.verifyNoInteractions(userRepo);
 	}
 	
 	@Test
 	public void createUserNoLastName() {
-		userService.createUser(users.get(5));
+		userServiceTest.createUser(users.get(5));
 		
 		Mockito.verifyNoInteractions(userRepo);
 	}
@@ -101,7 +104,7 @@ public class UserTests {
 	public void loginWithEmail() {
 		Mockito.doReturn(users.get(0)).when(userRepo).loginWithEmail(Mockito.any(), Mockito.any());
 		
-		userService.login(users.get(0).getEmail(), users.get(0).getPassword());
+		userServiceTest.login(users.get(0).getEmail(), users.get(0).getPassword());
 		
 		Mockito.verify(userRepo).loginWithEmail(Mockito.any(), Mockito.any());
 	}
@@ -110,16 +113,16 @@ public class UserTests {
 	public void loginWithUsername() {
 		Mockito.doReturn(users.get(0)).when(userRepo).loginWithUsername(Mockito.any(), Mockito.any());
 		
-		userService.login(users.get(0).getUserName(), users.get(0).getPassword());
+		userServiceTest.login(users.get(0).getUserName(), users.get(0).getPassword());
 		
 		Mockito.verify(userRepo).loginWithUsername(Mockito.any(), Mockito.any());
 	}
 	
 	@Test
 	public void loginWithEmptyField() {
-		userService.login(users.get(0).getUserName(), "");
-		userService.login("", users.get(0).getPassword());
-		userService.login("", "");
+		userServiceTest.login(users.get(0).getUserName(), "");
+		userServiceTest.login("", users.get(0).getPassword());
+		userServiceTest.login("", "");
 		
 		Mockito.verifyNoInteractions(userRepo);
 	}
@@ -131,27 +134,27 @@ public class UserTests {
 		Mockito.doReturn(users).when(userRepo).getUsersByUsername(Mockito.any());
 		
 		// Searching Usernames with Use in them
-		userService.getUsersByUsername("use");
+		userServiceTest.getUsersByUsername("use");
 		
 		Mockito.verify(userRepo).getUsersByUsername(Mockito.any());
 	}
 	
 	@Test
 	public void searchUsersByUsernameLessThan3Characters(){
-		userService.getUsersByUsername("us");
+		userServiceTest.getUsersByUsername("us");
 		
 		Mockito.verifyNoInteractions(userRepo);
 	}
 	
-//	----------------------  Get User Data By Id -------------------------
+//	----------------------  Get User By Id -------------------------
 	
 	@Test
-	public void getDataByUserId() {
-		Mockito.doReturn(users.get(0)).when(userRepo).getUserDataById(Mockito.anyInt());
+	public void getUserByUserId() {
+		Mockito.doReturn(users.get(0)).when(userRepo).getUserById(Mockito.anyInt());
 		
-		userService.getUserDataById(1);
+		userServiceTest.getUserById(1);
 		
-		Mockito.verify(userRepo).getUserDataById(Mockito.anyInt());
+		Mockito.verify(userRepo).getUserById(Mockito.anyInt());
 	}
 
 //	----------------------  Get Friends -------------------------
@@ -160,7 +163,7 @@ public class UserTests {
 	public void getFriends() {
 		Mockito.doReturn(users).when(userRepo).getFriends(Mockito.anyInt());
 		
-		userService.getFriends(1);
+		userServiceTest.getFriends(1);
 		
 		Mockito.verify(userRepo).getFriends(Mockito.anyInt());
 	}
@@ -171,23 +174,23 @@ public class UserTests {
 	public void updateUser() {
 		Mockito.doNothing().when(userRepo).updateUserData(Mockito.any());
 		
-		userService.updateUser(users.get(0));
+		userServiceTest.updateUser(users.get(0));
 		
 		Mockito.verify(userRepo).updateUserData(Mockito.any());
 	}
 	
 	@Test
 	public void updateUserBadEmail() {
-		userService.updateUser(users.get(1));
-		userService.updateUser(users.get(1));
+		userServiceTest.updateUser(users.get(1));
+		userServiceTest.updateUser(users.get(1));
 		
 		Mockito.verifyNoInteractions(userRepo);
 	}
 	
 	@Test
 	public void updateUserShortPassword() {
-		userService.updateUser(users.get(2));
-		userService.updateUser(users.get(4));
+		userServiceTest.updateUser(users.get(2));
+		userServiceTest.updateUser(users.get(4));
 		
 		Mockito.verifyNoInteractions(userRepo);
 	}
@@ -197,7 +200,7 @@ public class UserTests {
 	public void deleteUser() {
 		Mockito.doNothing().when(userRepo).deleteAccount(Mockito.anyInt());
 		
-		userService.deleteAccount(1);
+		userServiceTest.deleteAccount(1);
 		
 		Mockito.verify(userRepo).deleteAccount(Mockito.anyInt());
 	}

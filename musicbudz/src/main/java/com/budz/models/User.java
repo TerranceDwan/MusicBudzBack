@@ -4,12 +4,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "users")
 public class User {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int userId;
 	private String email;
 	private String password;
@@ -77,4 +79,11 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", userName=" + userName
+				+ ", firstName=" + firstName + ", lastName=" + lastName + "]";
+	}
+	
+	
 }
