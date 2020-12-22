@@ -35,6 +35,18 @@ public class Review {
 		this.setReview(review);
 	}
 	
+	public Review(int reviewId, String name, String type, int userId, String artistName, float rating, String title, String review) throws InvalidRatingException {
+		super();
+		this.setReviewId(reviewId);
+		this.setName(name);
+		this.setType(type);
+		this.setUserId(userId);
+		this.setArtistName(artistName);
+		this.setRating(rating);
+		this.setTitle(title);
+		this.setReview(review);
+	}
+	
 	public int getReviewId() {
 		return reviewId;
 	}
