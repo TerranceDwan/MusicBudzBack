@@ -14,19 +14,19 @@ public class RelationshipService {
 		return new ArrayList<User>();
 	}
 	
-	public void approveFriendRequest(User user, int friendId) {
+	public void approveFriendRequest(int userId, int friendId) {
 		
 	}
 	
-	public void denyFriendRequest(User user, int friendId) {
+	public void denyFriendRequest(int userId, int friendId) {
 		
 	}
 	
-	public void deleteRelationship(User user, int friendId) {
+	public void deleteRelationship(int userId, int friendId) {
 		
 	}
 	
-	public void deleteAllRelationshipsForUser(User user) {
+	public void deleteAllRelationshipsForUser(int userId) {
 		
 	}
 }
