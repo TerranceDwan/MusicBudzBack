@@ -8,8 +8,6 @@ public class MusicBudzApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MusicBudzApplication.class, args);
-		
-		System.out.println("Music Budz Test 1");
 	}
 
 }

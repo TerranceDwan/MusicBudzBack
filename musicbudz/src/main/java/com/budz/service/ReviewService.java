@@ -2,9 +2,12 @@ package com.budz.service;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Service;
+
 import com.budz.models.Review;
 import com.budz.models.User;
 
+@Service
 public class ReviewService {
 	//ReviewRepoImpl rimpl = new ReviewRepoImpl()
 	
