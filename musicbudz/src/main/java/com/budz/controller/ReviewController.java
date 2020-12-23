@@ -1,6 +1,7 @@
 package com.budz.controller;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -47,6 +48,7 @@ public class ReviewController {
 		}
 	}
 	
+	//might need a workaround for Optional<Review>
 	@GetMapping("/getReview")
 	public Review getReview(@RequestParam int reviewId) {
 		return reviewService.getReview(reviewId);
@@ -72,6 +74,6 @@ public class ReviewController {
 	
 	@GetMapping("/getReviewsByUser")
 	public ArrayList<Review> getReviewsByUser(@RequestParam User user) {
-		return reviewService.getReviewsByUser(user);
+		return reviewService.getReviewsByUserId(user.getUserId());
 	}
 }
