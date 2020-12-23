@@ -12,7 +12,7 @@ public interface UserRepo extends CrudRepository<User, Integer> {
 	User findByEmail(String email);
 	
 	@Query("select u from User u where u.userName like %:userName%")
-	ArrayList<User> getUserByUserName(String userName);
+	ArrayList<User> getUsersByUserName(String userName);
 	
 	@Query("select u from User u where u.email = :email AND u.password = :password")
 	User loginEmail(String email, String password);
@@ -21,12 +21,4 @@ public interface UserRepo extends CrudRepository<User, Integer> {
 	User loginUserName(String userName, String password);
 	
 	
-//	ArrayList<User> getAllUsers();
-//	ArrayList<User> getUsersByUsername(String query);
-//	User loginWithEmail(String email, String password);
-//	User loginWithUsername(String username, String password);
-//	User getUserDataById(int userId);
-//	ArrayList<User> getFriends(int userId);
-//	void updateUserData(User user);
-//	void deleteAccount(int userId);
 }
