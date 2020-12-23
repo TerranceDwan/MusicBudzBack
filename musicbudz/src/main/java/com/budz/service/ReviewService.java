@@ -42,8 +42,7 @@ public class ReviewService {
 		return new ArrayList();
 	}
 	
-	public ArrayList<Review> getReviewsByUser(User user) {
-		ArrayList<Review> toReturn = new ArrayList<Review>();
-		return new ArrayList();
+	public ArrayList<Review> getReviewsByUserId(int userId) {
+		return repo1.getReviewsByUserId(userId);
 	}
 }

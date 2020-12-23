@@ -10,7 +10,7 @@ import com.budz.models.*;
 public interface ReviewRepo extends CrudRepository<Review, Integer>{
 	
 	@Query("Select * from Review * where *.userId like %:userId%")
-	ArrayList<Review> getReviewsByUser(int userId); 
+	ArrayList<Review> getReviewsByUserId(int userId); 
 //	void insertReview(Review review);
 //	void updateReview(Review review);
 //	Review getReview();
