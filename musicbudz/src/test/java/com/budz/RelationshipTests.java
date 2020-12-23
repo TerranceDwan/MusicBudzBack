@@ -13,14 +13,14 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.budz.models.User;
-import com.budz.repository.RelationshipRepoImpl;
+import com.budz.repository.RelationshipRepo;
 import com.budz.service.RelationshipService;
 
 public class RelationshipTests {
 	@InjectMocks
 	private static RelationshipService relationshipService;
 	
-	@Mock private RelationshipRepoImpl relationshipRepo = mock(RelationshipRepoImpl.class);
+	@Mock private RelationshipRepo relationshipRepo = mock(RelationshipRepo.class);
 	
 	ArrayList<User> users = new ArrayList<User>();
 	
@@ -70,7 +70,7 @@ public class RelationshipTests {
 	public void getFriendRequests() {
 		Mockito.doReturn(users).when(relationshipRepo).getFriendRequest(Mockito.anyInt());
 		
-		relationshipService.getFriendRequests(users.get(0));
+		relationshipService.getFriendRequests(users.get(0).getUserId());
 		
 		Mockito.verify(relationshipRepo).getFriendRequest(Mockito.anyInt());
 	}
@@ -81,14 +81,14 @@ public class RelationshipTests {
 	public void acceptFriendRequest() {
 		Mockito.doNothing().when(relationshipRepo).acceptFriendRequest(Mockito.anyInt(), Mockito.anyInt());
 		
-		relationshipService.approveFriendRequest(users.get(0), 2);
+		relationshipService.approveFriendRequest(users.get(0).getUserId(), 2);
 		
 		Mockito.verify(relationshipRepo).acceptFriendRequest(Mockito.anyInt(), Mockito.anyInt());
 	}
 	
 	@Test
 	public void acceptFriendRequestSameUserId() {		
-		relationshipService.approveFriendRequest(users.get(1), 2);
+		relationshipService.approveFriendRequest(users.get(1).getUserId(), 2);
 		
 		Mockito.verifyNoInteractions(relationshipRepo);
 	}
@@ -99,14 +99,14 @@ public class RelationshipTests {
 	public void denyFriendRequest() {
 		Mockito.doNothing().when(relationshipRepo).denyFriendRequest(Mockito.anyInt(), Mockito.anyInt());
 		
-		relationshipService.denyFriendRequest(users.get(0), 2);
+		relationshipService.denyFriendRequest(users.get(0).getUserId(), 2);
 		
 		Mockito.verify(relationshipRepo).denyFriendRequest(Mockito.anyInt(), Mockito.anyInt());
 	}
 	
 	@Test
 	public void denyFriendRequestSameUserId() {		
-		relationshipService.denyFriendRequest(users.get(1), 2);
+		relationshipService.denyFriendRequest(users.get(1).getUserId(), 2);
 		
 		Mockito.verifyNoInteractions(relationshipRepo);
 	}
@@ -117,14 +117,14 @@ public class RelationshipTests {
 	public void deleteRelationship() {
 		Mockito.doNothing().when(relationshipRepo).deleteFriend(Mockito.anyInt(), Mockito.anyInt());
 		
-		relationshipService.deleteRelationship(users.get(0), 2);
+		relationshipService.deleteRelationship(users.get(0).getUserId(), 2);
 		
 		Mockito.verify(relationshipRepo).deleteFriend(Mockito.anyInt(), Mockito.anyInt());
 	}
 	
 	@Test
 	public void deleteRelationshipSameUserId() {		
-		relationshipService.deleteRelationship(users.get(1), 2);
+		relationshipService.deleteRelationship(users.get(1).getUserId(), 2);
 		
 		Mockito.verifyNoInteractions(relationshipRepo);
 	}
@@ -135,7 +135,7 @@ public class RelationshipTests {
 	public void deleteAllRelationship() {
 		Mockito.doNothing().when(relationshipRepo).deleteAllFriends(Mockito.anyInt());
 		
-		relationshipService.deleteAllRelationshipsForUser(users.get(0));
+		relationshipService.deleteAllRelationshipsForUser(users.get(0).getUserId());
 		
 		Mockito.verify(relationshipRepo).deleteAllFriends(Mockito.anyInt());
 	}

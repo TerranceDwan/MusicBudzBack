@@ -3,8 +3,10 @@ package com.budz.models;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="relationship")
 @IdClass(RelationshipId.class)
 public class Relationship {
 	
