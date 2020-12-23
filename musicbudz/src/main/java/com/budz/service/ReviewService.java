@@ -27,10 +27,13 @@ public class ReviewService {
 		repo1.save(review);
 	}
 	
-	//might need a workaround for Optional<Review>
-	//might need to make multiple of these? cant think of use cases yet 
-	public Optional<Review> getReview(int reviewId) {
-		return repo1.findById(reviewId);
+	public Review getReview(int reviewId) {
+		Optional<Review> toReturn = repo1.findById(reviewId);
+		if(!toReturn.isEmpty()) {
+			return toReturn.get();
+		} else {
+			return null;
+		}
 	}
 	
 	public void deleteReview(Review review) {

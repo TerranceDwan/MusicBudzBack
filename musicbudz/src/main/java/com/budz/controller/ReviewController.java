@@ -50,7 +50,7 @@ public class ReviewController {
 	
 	//might need a workaround for Optional<Review>
 	@GetMapping("/getReview")
-	public Optional<Review> getReview(@RequestParam int reviewId) {
+	public Review getReview(@RequestParam int reviewId) {
 		return reviewService.getReview(reviewId);
 	}
 	
