@@ -2,10 +2,13 @@ package com.budz.models;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,37 +16,43 @@ import javax.persistence.Table;
 public abstract class Comment {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int commentId;
-	private int userId;
-	private int reviewId;
-	private Date time;
+	private int id;
+	@Column
 	private String comment;
+	@Column
+	private Date time;
+	@JoinColumn
+	@ManyToOne
+	private User user;
+	@JoinColumn
+	@ManyToOne
+	private Review review;
 	
-	public Comment(int commentId, int userId, int reviewId, Date time, String comment) {
-		setCommentId(commentId);
-		setUserId(userId);
-		setReviewId(reviewId);
+	public Comment(int id, User user, Review review, Date time, String comment) {
+		setId(id);
+		setUser(user);
+		setReview(review);
 		setTime(time);
 		setComment(comment);
 	}
 	
-	public int getCommentId() {
-		return commentId;
+	public int getId() {
+		return id;
 	}
-	public void setCommentId(int commentId) {
-		this.commentId = commentId;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public int getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
-	public int getReviewId() {
-		return reviewId;
+	public Review getReview() {
+		return review;
 	}
-	public void setReviewId(int reviewId) {
-		this.reviewId = reviewId;
+	public void setReview(Review review) {
+		this.review = review;
 	}
 	public Date getTime() {
 		return time;

@@ -19,6 +19,24 @@ public class User {
 	private String firstName;
 	private String lastName;
 	
+	public User(int userId, String email, String password, String userName, String firstName, String lastName) {
+		super();
+		this.userId = userId;
+		this.email = email;
+		this.password = password;
+		this.userName = userName;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+	
+	public User(String email, String password, String userName, String firstName, String lastName) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.userName = userName;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
 	
 	public int getUserId() {
 		return userId;
@@ -61,29 +79,16 @@ public class User {
 		super();
 	}
 	
-	public User(int userId, String email, String password, String userName, String firstName, String lastName) {
-		super();
-		this.userId = userId;
-		this.email = email;
-		this.password = password;
-		this.userName = userName;
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
-	
-	public User(String email, String password, String userName, String firstName, String lastName) {
-		super();
-		this.email = email;
-		this.password = password;
-		this.userName = userName;
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", userName=" + userName
 				+ ", firstName=" + firstName + ", lastName=" + lastName + "]";
 	}
+	
+	public static boolean emailIsValid(String email) {
+      String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+      return email.matches(regex);
+   }
 	
 	
 }
