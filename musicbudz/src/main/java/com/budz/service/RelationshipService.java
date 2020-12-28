@@ -16,7 +16,9 @@ public class RelationshipService {
 	private RelationshipRepo relationshipRepo;
 
 	public void addFriend(int userId, int friendId) {
-		relationshipRepo.addFriend(userId, friendId);
+		if(userId != friendId) {
+			relationshipRepo.addFriend(userId, friendId);
+		}
 	}
 	
 	public ArrayList<User> getFriendRequests(int userId){
@@ -24,15 +26,22 @@ public class RelationshipService {
 	}
 	
 	public void approveFriendRequest(int userId, int friendId) {
-		relationshipRepo.acceptFriendRequest(userId, friendId);
+		if(userId != friendId) {
+			relationshipRepo.acceptFriendRequest(userId, friendId);
+		}
 	}
 	
 	public void denyFriendRequest(int userId, int friendId) {
-		relationshipRepo.denyFriendRequest(userId, friendId);
+		if(userId != friendId) {
+			relationshipRepo.denyFriendRequest(userId, friendId);
+		}
 	}
 	
 	public void deleteRelationship(int userId, int friendId) {
-		relationshipRepo.deleteFriend(userId, friendId);
+		if(userId != friendId) {
+			relationshipRepo.deleteFriend(userId, friendId);
+		}
+		
 	}
 	
 	public void deleteAllRelationshipsForUser(int userId) {
