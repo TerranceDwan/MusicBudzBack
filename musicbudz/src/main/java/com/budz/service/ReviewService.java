@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.budz.models.Relationship;
 import com.budz.models.Review;
 import com.budz.models.User;
 import com.budz.repository.RelationshipRepo;
@@ -42,7 +43,16 @@ public class ReviewService {
 	
 	//need RelationshipRepo complete before i can implement this
 	public ArrayList<Review> getFeed(User user) {
-		return new ArrayList();
+		ArrayList<Relationship> relations = repo2.getAllFriends(user.getUserId());
+		ArrayList<Review> toReturn = new ArrayList();
+		for(int i = 0; i < relations.size(); i++) {
+			int tmp = relations.get(i).getUserOneId();
+			if(tmp == user.getUserId()) {
+				tmp = relations.get(i).getUserTwoId();
+			}
+			toReturn.addAll(repo1.getReviewsByUserId(tmp));
+		}
+		return toReturn;
 	}
 	
 	public ArrayList<Review> getReviewsByUserId(int userId) {
