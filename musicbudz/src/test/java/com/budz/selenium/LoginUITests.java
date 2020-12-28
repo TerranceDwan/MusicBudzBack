@@ -1,10 +1,9 @@
 package com.budz.selenium;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -25,6 +24,7 @@ class LoginUITests {
 	}
 	
 	@Test
+	@Disabled("until Selenium works w/Jenkins.")
 	void test() {
 		WebElement username = driver.findElement(By.id("login_username"));
 		WebElement password = driver.findElement(By.id("login_password"));
