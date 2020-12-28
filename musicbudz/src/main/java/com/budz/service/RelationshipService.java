@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.budz.models.Relationship;
 import com.budz.models.User;
 import com.budz.repository.RelationshipRepo;
 
@@ -36,5 +37,9 @@ public class RelationshipService {
 	
 	public void deleteAllRelationshipsForUser(int userId) {
 		relationshipRepo.deleteAllFriends(userId);
+	}
+	
+	public ArrayList<Relationship> getAllFriendships(int userId) {
+		return relationshipRepo.getAllFriends(userId);
 	}
 }
