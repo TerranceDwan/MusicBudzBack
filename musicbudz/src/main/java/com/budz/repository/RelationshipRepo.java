@@ -10,11 +10,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.budz.models.Relationship;
+import com.budz.models.RelationshipId;
 import com.budz.models.User;
 
 @Transactional
 @Repository
-public interface RelationshipRepo extends JpaRepository<Relationship, Integer> {
+public interface RelationshipRepo extends CrudRepository<Relationship, RelationshipId> {
 	@Transactional
 	@Modifying
 	@Query(value = "INSERT INTO Relationship (userOneId, userTwoId, status, actionUserId) VALUES (:userId, :friendUserId, 0, :friendUserId)", nativeQuery = true)
@@ -44,6 +45,6 @@ public interface RelationshipRepo extends JpaRepository<Relationship, Integer> {
 	void deleteAllFriends(int userId);
 	
 	//make sure this should be checking both userIds or just one
-	@Query("Select u from user u where u.userOneId = :userId OR u.userTwoId = :userId")
+	@Query("Select r from Relationship r where r.userOneId = :userId OR r.userTwoId = :userId")
 	ArrayList<Relationship> getAllFriends(int userId);
 }
