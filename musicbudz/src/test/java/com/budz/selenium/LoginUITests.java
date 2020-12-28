@@ -12,6 +12,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+@Disabled("until Selenium works w/Jenkins.")
 class LoginUITests {
 	public static WebDriver driver;
 	
@@ -24,7 +25,6 @@ class LoginUITests {
 	}
 	
 	@Test
-	@Disabled("until Selenium works w/Jenkins.")
 	void test() {
 		WebElement username = driver.findElement(By.id("login_username"));
 		WebElement password = driver.findElement(By.id("login_password"));
