@@ -30,7 +30,7 @@ public class ReviewService {
 	
 	public Review getReview(int reviewId) {
 		Optional<Review> toReturn = repo1.findById(reviewId);
-		if(!toReturn.isEmpty()) {
+		if(!toReturn.isPresent()) {
 			return toReturn.get();
 		} else {
 			return null;
