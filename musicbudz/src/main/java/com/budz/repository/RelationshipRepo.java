@@ -42,4 +42,8 @@ public interface RelationshipRepo extends JpaRepository<Relationship, Integer> {
 	@Modifying
 	@Query("UPDATE Relationship r SET r.status = 1 WHERE r.userOneId = :userId")
 	void deleteAllFriends(int userId);
+	
+	//make sure this should be checking both userIds or just one
+	@Query("Select u from user u where u.userOneId = :userId OR u.userTwoId = :userId")
+	ArrayList<Relationship> getAllFriends(int userId);
 }
