@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.budz.models.User;
 import com.budz.repository.UserRepo;
+import com.budz.utility.StringUtil;
 
 @Service
 public class UserService {
@@ -17,11 +18,11 @@ public class UserService {
 	private UserRepo userRepo;
 	
 	public void createUser(User user) {
-		if(user.getEmail().isBlank() || 
-			user.getFirstName().isBlank() || 
-			user.getLastName().isBlank() || 
-			user.getUserName().isBlank() || 
-			user.getPassword().isBlank()
+		if(StringUtil.isBlank(user.getEmail()) || 
+			StringUtil.isBlank(user.getFirstName()) || 
+			StringUtil.isBlank(user.getLastName()) || 
+			StringUtil.isBlank(user.getUserName()) || 
+			StringUtil.isBlank(user.getPassword())
 		) {
 			throw new IllegalArgumentException("One or More fields were blank");
 		} else if(!User.emailIsValid(user.getEmail())) {
@@ -40,7 +41,7 @@ public class UserService {
 	public User login(String usernameOrEmail, String password) {
 		if(User.emailIsValid(usernameOrEmail)) {
 			return userRepo.loginEmail(usernameOrEmail, password);
-		}else if (!usernameOrEmail.isBlank() && !password.isBlank()){
+		}else if (!StringUtil.isBlank(usernameOrEmail) && !StringUtil.isBlank(password)){
 			return userRepo.loginUserName(usernameOrEmail, password);
 		}else {
 			throw new IllegalArgumentException("Both fields require input");
@@ -72,11 +73,11 @@ public class UserService {
 	}
 	
 	public void updateUser(User user) {
-		if(user.getEmail().isBlank() || 
-			user.getFirstName().isBlank() || 
-			user.getLastName().isBlank() || 
-			user.getUserName().isBlank() || 
-			user.getPassword().isBlank()
+		if(StringUtil.isBlank(user.getEmail()) || 
+				StringUtil.isBlank(user.getFirstName()) || 
+				StringUtil.isBlank(user.getLastName()) || 
+				StringUtil.isBlank(user.getUserName()) || 
+				StringUtil.isBlank(user.getPassword())
 		) {
 			throw new IllegalArgumentException("One or More fields were blank");
 		} else if(!User.emailIsValid(user.getEmail())) {
