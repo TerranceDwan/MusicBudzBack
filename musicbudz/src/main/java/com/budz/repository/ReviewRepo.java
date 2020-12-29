@@ -11,6 +11,9 @@ public interface ReviewRepo extends CrudRepository<Review, Integer>{
 	
 	@Query("Select u from Review u where u.userId = :userId")
 	ArrayList<Review> getReviewsByUserId(int userId); 
+	
+	@Query("Select u from Review u where u.title like %:name%")
+	ArrayList<Review> getReviewsByName(String name);
 //	void insertReview(Review review);
 //	void updateReview(Review review);
 //	Review getReview();

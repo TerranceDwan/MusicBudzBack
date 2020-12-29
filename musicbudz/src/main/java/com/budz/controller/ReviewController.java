@@ -76,4 +76,9 @@ public class ReviewController {
 	public ArrayList<Review> getReviewsByUser(@RequestParam User user) {
 		return reviewService.getReviewsByUserId(user.getUserId());
 	}
+	
+	@GetMapping("/getReviewsByName")
+	public ArrayList<Review> getRewiewsByName(@RequestParam String name) {
+		return reviewService.getReviewsByName(name);
+	}
 }
