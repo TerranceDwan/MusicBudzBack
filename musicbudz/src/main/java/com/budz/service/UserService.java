@@ -1,6 +1,5 @@
 package com.budz.service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.budz.models.User;
+import com.budz.repository.RelationshipRepo;
 import com.budz.repository.UserRepo;
 import com.budz.utility.StringUtil;
 
@@ -61,16 +61,9 @@ public class UserService {
 		return userRepo.findById(userId).get();
 	}
 	
-	public List<User> getFriends(int userId){
-		return Arrays.asList(
-				new User(1, "email@email.com", "password", "user1", "John", "Doe"),
-				new User(2, "email", "password", "user2", "Jeff", "Doe"),
-				new User(3, "email@email.com", "pass", "user3", "Jim", "Doe"),
-				new User(4, "emailemail.com", "password", "us", "Jim", "Doe"),
-				new User(5, "email@email.com", "abc", "user5", "", "Doe"),
-				new User(6, "email@email.com", "pass", "user6", "Jim", "")
-				);
-	}
+//	public List<User> getFriends(int userId){
+//		return userRepo.getFriends(userId);
+//	}
 	
 	public void updateUser(User user) {
 		if(StringUtil.isBlank(user.getEmail()) || 

@@ -49,10 +49,10 @@ public class UserController {
 		return UserService.getUserById(id);
 	}
 	
-	@GetMapping("/getFriends")
-	public List<User> getFriends(@RequestParam int id) {
-		return UserService.getFriends(id);
-	}
+//	@GetMapping("/getFriends")
+//	public List<User> getFriends(@RequestParam int id) {
+//		return UserService.getFriends(id);
+//	}
 	
 	@PatchMapping("/updateUser")
 	public void updateUser(@RequestParam int id,

@@ -20,5 +20,8 @@ public interface UserRepo extends CrudRepository<User, Integer> {
 	@Query("select u from User u where u.userName = :userName AND u.password = :password")
 	User loginUserName(String userName, String password);
 	
-	
+//	@Query("select u from User u "
+//			+ "join u.userOneId id "
+//			+ "where id = :userId")
+//	ArrayList<User> getFriends(int userId);
 }

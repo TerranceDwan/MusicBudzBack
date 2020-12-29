@@ -51,6 +51,5 @@ create table relationship (
 	check (status >= 0 and status <= 2),
 	action_user_id int not null,
 	PRIMARY KEY(user_one_id, user_two_id)
+	CHECK (user_one_id < user_two_id)
 );
-
-
