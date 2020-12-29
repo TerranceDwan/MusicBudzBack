@@ -44,7 +44,7 @@ public class ReviewService {
 	//need RelationshipRepo complete before i can implement this
 	public ArrayList<Review> getFeed(User user) {
 		ArrayList<Relationship> relations = repo2.getAllFriends(user.getUserId());
-		ArrayList<Review> toReturn = new ArrayList();
+		ArrayList<Review> toReturn = new ArrayList<Review>();
 		for(int i = 0; i < relations.size(); i++) {
 			int tmp = relations.get(i).getUserOneId();
 			if(tmp == user.getUserId()) {
@@ -57,5 +57,9 @@ public class ReviewService {
 	
 	public ArrayList<Review> getReviewsByUserId(int userId) {
 		return repo1.getReviewsByUserId(userId);
+	}
+	
+	public ArrayList<Review> getReviewsByName(String name) {
+		return repo1.getReviewsByName(name);
 	}
 }
