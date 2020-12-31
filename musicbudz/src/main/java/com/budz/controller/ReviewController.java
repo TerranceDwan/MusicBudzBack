@@ -25,9 +25,9 @@ public class ReviewController {
 	
 	@PostMapping("/postRewiew")
 	public void postReview(@RequestParam String name, @RequestParam String type, @RequestParam int userId, 
-			@RequestParam String artistName, @RequestParam float rating, @RequestParam String title, @RequestParam String Review) {
+			@RequestParam String artistName, @RequestParam float rating, @RequestParam String title, @RequestParam String review) {
 		try {
-			Review rev = new Review(name, type, userId, artistName, rating, title, Review);
+			Review rev = new Review(name, type, userId, artistName, rating, title, review);
 			reviewService.postReview(rev);
 		} catch (InvalidRatingException e) {
 			// TODO Auto-generated catch block
@@ -38,9 +38,9 @@ public class ReviewController {
 	//might switch this one to receiving a Review object
 	@PostMapping("/updateReview")
 	public void updateReview(@RequestParam int reviewId, @RequestParam String name, @RequestParam String type, @RequestParam int userId, 
-			@RequestParam String artistName, @RequestParam float rating, @RequestParam String title, @RequestParam String Review) {
+			@RequestParam String artistName, @RequestParam float rating, @RequestParam String title, @RequestParam String review) {
 		try {
-			Review rev = new Review(name, type, userId, artistName, rating, title, Review);
+			Review rev = new Review(name, type, userId, artistName, rating, title, review);
 			reviewService.updateReview(rev);
 		} catch (InvalidRatingException e) {
 			// TODO Auto-generated catch block
@@ -57,9 +57,9 @@ public class ReviewController {
 	//might switch this one to receiving a Review object
 	@PostMapping("/deleteReview")
 	public void deleteReview(@RequestParam int reviewId, @RequestParam String name, @RequestParam String type, @RequestParam int userId, 
-			@RequestParam String artistName, @RequestParam float rating, @RequestParam String title, @RequestParam String Review) {
+			@RequestParam String artistName, @RequestParam float rating, @RequestParam String title, @RequestParam String review) {
 		try {
-			Review rev = new Review(name, type, userId, artistName, rating, title, Review);
+			Review rev = new Review(name, type, userId, artistName, rating, title, review);
 			reviewService.deleteReview(rev);
 		} catch (InvalidRatingException e) {
 			// TODO Auto-generated catch block
